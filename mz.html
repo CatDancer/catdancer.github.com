@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html><head><title>mz</title><style type="text/css">
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p {
+  width: 40em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+
+</style></head><body><a href="/">Cat Dancer&rsquo;s hacks</a>:<h1>mz</h1><p><i>Allows easy access to the underlying MzScheme language that Arc is written in.</i></p><p>This hack introduces an &ldquo;<code>mz</code>&rdquo; syntax form into Arc.  The argument to <code>mz</code> is passed through unchanged to MzScheme when the Arc expression is compiled into MzScheme. For example, to call the MzScheme procedure &ldquo;<code>current-seconds</code>&rdquo;, you can say:</p><blockquote><pre>
+  arc&#62; (mz (current-seconds))
+  1233715389
+</pre></blockquote><p>With Arc&rsquo;s colon syntax, this can also be written as:</p><blockquote><pre>
+arc&#62; (mz:current-seconds)
+1233715437
+</pre></blockquote><p>I chose to call the syntax &ldquo;<code>mz</code>&rdquo; so that visually, &ldquo;<code>mz:current-seconds</code>&rdquo; looks like &ldquo;call MzScheme&rsquo;s <code>current-seconds</code> procedure&rdquo;.</p><p>Note however, that by itself <code>mz</code> does not convert between MzScheme and Arc data types.  For example, if an MzScheme procedure returns a boolean, you&rsquo;ll get an MzScheme <code>#t</code> or <code>#f</code> boolean, not an Arc <code>t</code> or <code>nil</code> boolean.</p><blockquote><pre>
+arc&#62; (mz:port? 4)
+#f
+</pre></blockquote><h2>Get This Hack</h2><ul><li><a href="http://catdancer.github.com/mz.patch" target="_blank">diff against arc2</a></li><li><a href="http://github.com/CatDancer/arc-mz-patch/tree/master">repository on GitHub</a></li><li><a href="http://github.com/CatDancer/arc-mz-patch/tarball/master">download a tarball of arc2 with this patch applied</a></li></ul><h2>Applying This Hack to Your Arc</h2><p>By using patch or git, you can incorporate this patch into your version of Arc, even if you already have other patches and changes applied.</p><h3>With patch</h3><p>To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/mz.patch">mz.patch</a> into your Arc directory, and type:</p><blockquote><pre>patch &#60;mz.patch</pre></blockquote><h3>With git</h3><p>To apply this patch using git, start with a git repository containing arc2 or the version of Arc that you want to patch.  Then in the git working directory, type:</p><blockquote><pre>git pull git://github.com/CatDancer/arc-mz-patch.git master</pre></blockquote></body></html>
