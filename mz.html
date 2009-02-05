@@ -20,7 +20,7 @@ td {
 }
 
 
-</style></head><body><a href="/">Cat Dancer&rsquo;s hacks</a>:<h1>mz</h1><p><i>Allows easy access to the underlying MzScheme language that Arc is written in.</i></p><p>This hack introduces an &ldquo;<code>mz</code>&rdquo; syntax form into Arc.  The argument to <code>mz</code> is passed through unchanged to MzScheme when the Arc expression is compiled into MzScheme. For example, to call the MzScheme procedure &ldquo;<code>current-seconds</code>&rdquo;, you can say:</p><blockquote><pre>
+</style></head><body><a href="/">Arc hacks</a>:<h1>mz</h1><p><i>Allows easy access to the underlying MzScheme language that Arc is written in.</i></p><p>This hack introduces an &ldquo;<code>mz</code>&rdquo; syntax form into Arc.  The argument to <code>mz</code> is passed through unchanged to MzScheme when the Arc expression is compiled into MzScheme. For example, to call the MzScheme procedure &ldquo;<code>current-seconds</code>&rdquo;, you can say:</p><blockquote><pre>
   arc&#62; (mz (current-seconds))
   1233715389
 </pre></blockquote><p>With Arc&rsquo;s colon syntax, this can also be written as:</p><blockquote><pre>
