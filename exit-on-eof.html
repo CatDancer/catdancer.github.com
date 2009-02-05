@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html><head><title>exit-on-eof</title><style type="text/css">
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p {
+  width: 40em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+
+</style></head><body><a href="/">Cat Dancer&rsquo;s hacks</a>:<h1>exit-on-eof</h1><p><i>Patches Arc so that an eof (^D in Unix) at the command prompt will exit Arc.</i></p><blockquote><pre>
+$ mzscheme -m -f as.scm
+Use (quit) to quit, (tl) to return here after an interrupt.
+arc&#62; ^D
+$
+</pre></blockquote><h2>Get This Hack</h2><ul><li><a href="http://catdancer.github.com/exit-on-eof.patch.txt" target="_blank">diff against arc2</a></li><li><a href="http://github.com/CatDancer/arc-exit-on-eof/tree/master">repository on GitHub</a></li><li><a href="http://github.com/CatDancer/arc-exit-on-eof/tarball/master">download a tarball of arc2 with this patch applied</a></li></ul><h2>Applying This Hack to Your Arc</h2><p>By using patch or git, you can incorporate this patch into your version of Arc, even if you already have other patches and changes applied.</p><h3>With patch</h3><p>To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/exit-on-eof.patch">exit-on-eof.patch</a> into your Arc directory, and type:</p><blockquote><pre>patch &#60;exit-on-eof.patch</pre></blockquote><h3>With git</h3><p>To apply this patch using git, start with a git repository containing arc2 or the version of Arc that you want to patch.  Then in the git working directory, type:</p><blockquote><pre>git pull git://github.com/CatDancer/arc-exit-on-eof.git master</pre></blockquote></body></html>
