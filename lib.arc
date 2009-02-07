@@ -7,21 +7,21 @@
 
 (= lib-url-schemes* '("http://" "https://"))
 
-(def aurl (x)
+(def alib-url (x)
   (and (is (type x) 'string)
        (some [begins x _] lib-url-schemes*)))
 
 (def anarcfile (url)
   (endmatch ".arc" url))
 
-(def url-path (url)
+(def lib-url-path (url)
   (or (some (fn (scheme) (and (begins url scheme) (cut url (len scheme)))) lib-url-schemes*) (err (string "not a url: " url))))
 
 (def lib-path (url)
-  (string "lib/" (url-path url)))
+  (string "lib/" (lib-url-path url)))
 
 (def lib-cache-path (url)
-  (string "lib/cache/" (url-path url)))
+  (string "lib/cache/" (lib-url-path url)))
 
 (def lib-pull urls
   (ensure-dir "lib/cache")
@@ -62,7 +62,6 @@
   'ok)
 
 ; "foo/bar/file" -> "foo/bar/"
-;
 (def path-dirpart (path)
   (mz (path->string (let-values (((dir a b) (split-path path))) dir))))
 
@@ -77,7 +76,7 @@
   'ok)
 
 (def lib (url)
-  (unless (aurl url) (err (string "not a url: " url)))
+  (unless (alib-url url) (err (string "not a url: " url)))
   (unless (lib-loaded* url)
     (unless ((mz file-exists?) (lib-path url))
       (lib-fetch url))
