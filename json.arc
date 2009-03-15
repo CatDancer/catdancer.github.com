@@ -1,38 +1,43 @@
-; This work is hereby released into the Public Domain.
+; This code is in the public domain.
 
-(def decode-backslash (j a)
-  (withs (hexdigit (fn (c)
-                    (or (<= #\a c #\f) (<= #\A c #\F) (<= #\0 c #\9)))
-          uni (fn (j)
-               (let u (firstn 4 j)
-                 (unless (and (is (len u) 4) (all hexdigit u)) (err "need 4 hexadecimal digits after \\u"))
-                 (coerce (coerce (coerce u 'string) 'int 16) 'char)))
-          backslash-char (fn (c)
-                           (case c
-                             #\" "\""
-                             #\\ "\\"
-                             #\/ "/"
-                             #\b "\b"
-                             #\f "\f"
-                             #\n "\n"
-                             #\r "\r"
-                             #\t "\t"
-                             (err "not able to handle " c " after backslash"))))
+(def hexdigit (c)
+  (or (<= #\a c #\f) (<= #\A c #\F) (<= #\0 c #\9)))
+
+(def json-unicode-digits (j)
+  (let u (firstn 4 j)
+    (unless (and (is (len u) 4) (all hexdigit u)) (err "need 4 hexadecimal digits after \\u"))
+    (coerce (coerce (coerce u 'string) 'int 16) 'char)))
+
+(def json-backslash-char (c)
+  (case c
+    #\" #\"
+    #\\ #\\
+    #\/ #\/
+    #\b #\backspace
+    #\f #\page
+    #\n #\newline
+    #\r #\return
+    #\t #\tab
+    (err "not able to handle " c " after backslash")))
+
+(def decode-json-backslash (j a)
     (if (no j) (err "missing char after backslash"))
     (if (is (car j) #\u)
-         (list (nthcdr 5 j) (uni (cdr j)))
-         (list (cdr j) (backslash-char (car j))))))
+         (list (nthcdr 5 j) (json-unicode-digits (cdr j)))
+         (list (cdr j) (json-backslash-char (car j)))))
 
 (def decode-json-string (j a)
   (if (no j) (err "tailing \" not found in string"))
   (case (car j)
-    #\\ (let (j2 c) (decode-backslash (cdr j) a)
-          (decode-json-string j2 (+ a (string c))))
+    #\\ (let (j2 c) (decode-json-backslash (cdr j) a)
+          (decode-json-string j2 (cons c a)))
     #\" (list (cdr j) a)
-        (decode-json-string (cdr j) (+ a (string (car j))))))
+        (decode-json-string (cdr j) (cons (car j) a))))
 
 (def parse-json-string (j)
-  (if (is (car j) #\") (decode-json-string (cdr j) "")))
+  (if (is (car j) #\")
+    (let (j2 a) (decode-json-string (cdr j) nil)
+      (list j2 (coerce (rev a) 'string)))))
 
 (def decode-json-array (j a)
   (if (no j)
@@ -109,14 +114,22 @@
     (if j (err "unexpected input after value"))
     v))
 
-
+(def 4hex (i)
+  (let s (coerce i 'string 16)
+    (if (< (len s) 4)
+         (string (coerce (n-of (- 4 (len s)) #\0) 'string) s)
+         s)))
 
 (def encode-json-string (str)
   (tostring
     (each c str
-      (pr (case c #\" "\\\""
-                  #\\ "\\\\"
-                      c)))))
+      (pr
+        (let i (coerce c 'int)
+          (if (<  i 32)
+               (string "\\u" (4hex i))
+               (case c #\" "\\\""
+                       #\\ "\\\\"
+                       c)))))))
 
 (def string>json (v) (string "\"" (encode-json-string v) "\""))
 
