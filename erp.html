@@ -1,4 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html><head><title>erp</title><style type="text/css">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><title
+>erp</title
+><style type="text/css"
+>
 
 
 body {
@@ -24,12 +29,88 @@ td {
 }
 
 
-</style></head><body><a href="/">Arc hacks</a>:<h1>erp</h1><p><i>My favorite debug print macro.</i></p><p>Consider the typical debug print statement:</p><blockquote><pre>(prn &#34;foo: &#34; foo)</pre></blockquote><p>notice the redundancy... I want to see what value I&rsquo;m printing out, so I have to type &ldquo;foo&rdquo; twice.</p><p><code>erp</code> is a macro prints out its argument, both literally and what it evaluates to. And, it returns the result as well, so it can be inserted in the middle of some code.</p><p>The message is printed to stderr so that <code>erp</code> can be called from inside of a <code>defop</code>, and the message will print on Arc&rsquo;s REPL instead of appearing in the middle of the web page.</p><p>For example, if I&rsquo;m looking at</p><blockquote><pre> (+ 3 (/ 4 2) 5)</pre></blockquote><p>and I&rsquo;m thinking, &ldquo;wait, what is <code>(/ 4 2)</code> evaluating to again?&rdquo;, I stick in <code>erp</code>:</p><blockquote><pre>
+</style
+></head
+><body
+><a href="/"
+>Arc hacks</a
+>:<h1
+>erp</h1
+><p
+><i
+>My favorite debug print macro.</i
+></p
+><p
+>Consider the typical debug print statement:</p
+><blockquote
+><pre
+>(prn &#34;foo: &#34; foo)</pre
+></blockquote
+><p
+>notice the redundancy... I want to see what value I&rsquo;m printing out, so I have to type &ldquo;foo&rdquo; twice.</p
+><p
+><code>erp</code> is a macro prints out its argument, both literally and what it evaluates to. And, it returns the result as well, so it can be inserted in the middle of some code.</p
+><p
+>The message is printed to stderr so that <code>erp</code> can be called from inside of a <code>defop</code>, and the message will print on Arc&rsquo;s REPL instead of appearing in the middle of the web page.</p
+><p
+>For example, if I&rsquo;m looking at</p
+><blockquote
+><pre
+> (+ 3 (/ 4 2) 5)</pre
+></blockquote
+><p
+>and I&rsquo;m thinking, &ldquo;wait, what is <code>(/ 4 2)</code> evaluating to again?&rdquo;, I stick in <code>erp</code>:</p
+><blockquote
+><pre
+>
  arc&#62; (+ 3 (erp (/ 4 2)) 5)
  (/ 4 2): 2
  10
- arc&#62;</pre></blockquote><p>As drcode pointed out to me, by using Arc&rsquo;s colon syntax we can even avoid the extra parentheses:</p><blockquote><pre>
+ arc&#62;</pre
+></blockquote
+><p
+>As drcode pointed out to me, by using Arc&rsquo;s colon syntax we can even avoid the extra parentheses:</p
+><blockquote
+><pre
+>
  arc&#62; (+ 3 (erp:/ 4 2) 5)
  (/ 4 2): 2
  10
- arc&#62;</pre></blockquote><p>Why &ldquo;<code>erp</code>&rdquo;? Well, A) it&rsquo;s short for &ldquo;stderr print&rdquo;, and B) it&rsquo;s what I&rsquo;m usually thinking in the middle of a debug session... :-)</p><h2>Get This Hack</h2><ul><li>With <a href="lib.html">lib</a> installed:<br><blockquote><pre>(lib &#34;http://catdancer.github.com/erp.arc&#34;)</pre></blockquote></li><li>erp.arc (<a href="http://catdancer.github.com/erp.arc.txt">view</a>) (<a href="http://catdancer.github.com/erp.arc">download</a>)</li><li><a href="http://github.com/CatDancer/erp/tree">repository on GitHub</a></li></ul><h2>Comment</h2><a href="http://arclanguage.org/item?id=8726">Comment</a> on this hack in the Arc Forum.<h2>License</h2><p><a href="http://creativecommons.org/licenses/publicdomain/">public domain</a></p></body></html>
+ arc&#62;</pre
+></blockquote
+><p
+>Why &ldquo;<code>erp</code>&rdquo;? Well, A) it&rsquo;s short for &ldquo;stderr print&rdquo;, and B) it&rsquo;s what I&rsquo;m usually thinking in the middle of a debug session... :-)</p
+><h2
+>Get This Hack</h2
+><ul
+><li
+>With <a href="lib.html">lib</a> installed:<br
+><blockquote
+><pre
+>(lib &#34;http://catdancer.github.com/erp.arc&#34;)</pre
+></blockquote
+></li
+><li
+>erp.arc (<a href="http://catdancer.github.com/erp.arc.txt"
+>view</a
+>) (<a href="http://catdancer.github.com/erp.arc"
+>download</a
+>)</li
+><li
+><a href="http://github.com/CatDancer/erp/tree"
+>repository on GitHub</a
+></li
+></ul
+><h2
+>Comment</h2
+><a href="http://arclanguage.org/item?id=8726"
+>Comment</a
+> on this hack in the Arc Forum.<h2
+>License</h2
+><p
+><a href="http://creativecommons.org/licenses/publicdomain/"
+>public domain</a
+></p
+></body
+></html
+>
