@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><title
+>emacs-utf8</title
+><style type="text/css"
+>
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p, ol {
+  width: 40em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+
+</style
+></head
+><body
+><a href="/"
+>Arc hacks</a
+>:<h2
+>How To Convince Emacs to Save .arc files in UTF-8</h2
+><p
+>MzScheme fully supports Unicode and defaults to reading and writing files in the Unicode UTF-8 encoding, so you can conveniently use Unicode characters in both strings and symbols.</p
+><p
+>UTF-8 is a superset of ASCII, so an ASCII file can be read in as a UTF-8 document without any special translation.  If a Unicode document contains only ASCII characters, then when it is written out as a UTF-8 file it will be a plain ASCII file.</p
+><p
+>However, if you use Emacs as your editor, there was some ancient file archive format that had an &ldquo;arc&rdquo; extension, so by default Emacs will save <code>.arc</code> files without any translation from Emacs&rsquo; internal representation of Unicode characters.  This means that while you can easily type or copy Unicode characters into your Emacs buffer, when you save your file the characters will turn into garbage.</p
+><p
+>Add this to your <code>.emacs</code> file to have <code>.arc</code> files saved in UTF-8:</p
+><div style="margin-left: 2em"
+><pre
+>(setq auto-coding-alist
+  (cons '("\\.arc\\'" . utf-8) auto-coding-alist))
+</pre
+></div
+></body
+></html
+>
