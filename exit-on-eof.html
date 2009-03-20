@@ -74,19 +74,37 @@ $
 ><p
 >To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/exit-on-eof.patch"
 >exit-on-eof.patch</a
-> into your Arc directory, and type:</p
+> into your Arc directory, and at the Unix command line inside the arc directory, type:</p
 ><blockquote
 ><pre
->patch &#60;exit-on-eof.patch</pre
+> patch &#60;exit-on-eof.patch</pre
+></blockquote
+><p
+>&ldquo;<code>patch</code>&rdquo; is a standard utility that comes with Unix.  (If you&rsquo;re running Windows, iirc <code>patch</code> comes with cygwin, though I don&rsquo;t remember for sure).</p
+><p
+>For example,</p
+><blockquote
+><pre
+> $ wget http://ycombinator.com/arc/arc2.tar
+ [blah blah downloading blah blah]
+ $ tar xf arc2.tar
+ $ cd arc2
+ $ patch &#60;exit-on-eof.patch
+ patching [...]
+ $</pre
 ></blockquote
 ><h3
 >With git</h3
+><div style="text-decoration: line-through"
 ><p
 >To apply this patch using git, start with a git repository containing arc2 or the version of Arc that you want to patch.  Then in the git working directory, type:</p
 ><blockquote
 ><pre
 >git pull git://github.com/CatDancer/arc-exit-on-eof.git master</pre
 ></blockquote
+></div
+><p
+>Actually &ldquo;git pull&rdquo; is only going to work if the two git repositories share a common ancestor. I suspect there&rsquo;s some way to do this using git, but I haven&rsquo;t gone looking yet.</p
 ><h2
 >License</h2
 ><p

@@ -131,7 +131,8 @@
                        #\\ "\\\\"
                        c)))))))
 
-(def string>json (v) (string "\"" (encode-json-string v) "\""))
+(def string>json (v)
+  (string "\"" (encode-json-string v) "\""))
 
 (def integer>json (v) (string v))
 
