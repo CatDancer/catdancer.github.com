@@ -162,5 +162,5 @@
       (is v 'null)      "null"
       (isa v 'sym)      (string>json (coerce v 'string))
       (isa v 'table)    (object>json v)
-      ((mz integer?) v) (integer>json v)
+      (isa v 'int)      (integer>json v)
       (err "can't convert" v)))
