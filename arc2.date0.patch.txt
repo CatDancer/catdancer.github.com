@@ -1,0 +1,38 @@
+diff --git a/ac.scm b/ac.scm
+index b16531f..8cbde57 100644
+--- a/ac.scm
++++ b/ac.scm
+@@ -48,6 +48,7 @@
+ (require (lib "port.ss"))
+ (require (lib "process.ss"))
+ (require (lib "pretty.ss"))
++(require (lib "date.ss"))
+ 
+ ; compile an Arc expression into a Scheme expression,
+ ; both represented as s-expressions.
+@@ -1136,6 +1137,10 @@
+ 
+ (xdef 'quit exit)
+ 
++(xdef 'date
++  (lambda ()
++    (parameterize ((date-display-format 'iso-8601))
++      (date->string (seconds->date (current-seconds))))))
+ 
+ )
+ 
+diff --git a/arc.arc b/arc.arc
+index c2b6805..ab06b16 100644
+--- a/arc.arc
++++ b/arc.arc
+@@ -1212,10 +1212,6 @@
+   (unless (dir-exists path)
+     (system (string "mkdir -p " path))))
+ 
+-(def date ((o time (seconds)))
+-  (let val (tostring (system (string "date -u -r " time " \"+%Y-%m-%d\"")))
+-    (cut val 0 (- (len val) 1))))
+-
+ (def count (test x)
+   (with (n 0 testf (testify test))
+     (each elt x

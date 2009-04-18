@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
 ><head
+><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
 ><title
 >atomic-fix</title
 ><style type="text/css"
@@ -33,7 +34,7 @@ td {
 ></head
 ><body
 ><a href="/"
->Arc hacks</a
+>Cat’s hacks</a
 >:<h1
 >atomic-fix</h1
 ><p
@@ -52,58 +53,60 @@ td {
 >Get This Hack</h2
 ><ul
 ><li
-><a href="http://catdancer.github.com/atomic-fix.patch.txt" target="_blank"
+><a href="http://catdancer.github.com/arc2.atomic-fix0.patch.txt" target="_blank"
 >diff against arc2</a
 ></li
 ><li
-><a href="http://github.com/CatDancer/arc-atomic-fix/tree"
+><a href="http://github.com/CatDancer/arc/tree/arc2.atomic-fix0"
 >repository on GitHub</a
 ></li
 ><li
-><a href="http://github.com/CatDancer/arc-atomic-fix/tarball/master"
+><a href="http://github.com/CatDancer/arc/tarball/arc2.atomic-fix0"
 >download a tarball of arc2 with this patch applied</a
 ></li
 ></ul
 ><h2
->Applying This Hack to Your Arc</h2
+>Apply This Hack to Your Arc</h2
 ><p
 >By using patch or git, you can incorporate this patch into your version of Arc.</p
 ><h3
 >With patch</h3
 ><p
->To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/atomic-fix.patch"
->atomic-fix.patch</a
-> into your Arc directory, and at the Unix command line inside the arc directory, type:</p
+>To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/arc2.atomic-fix0.patch"
+>arc2.atomic-fix0.patch</a
+> into your Arc directory, and at the Unix command line inside the Arc directory, type:</p
 ><blockquote
 ><pre
-> patch &#60;atomic-fix.patch</pre
+> patch &#60;arc2.atomic-fix0.patch</pre
 ></blockquote
 ><p
->&ldquo;<code>patch</code>&rdquo; is a standard utility that comes with Unix.  (If you&rsquo;re running Windows, iirc <code>patch</code> comes with cygwin, though I don&rsquo;t remember for sure).</p
+>&ldquo;<code>patch</code>&rdquo; is a standard utility that comes with Unix.  (If you&rsquo;re running Windows, iirc <code>patch</code> comes with cygwin).</p
 ><p
 >For example,</p
 ><blockquote
 ><pre
 > $ wget http://ycombinator.com/arc/arc2.tar
- [blah blah downloading blah blah]
+ [... downloading ...]
  $ tar xf arc2.tar
  $ cd arc2
- $ patch &#60;atomic-fix.patch
+ $ patch &#60;arc2.atomic-fix0.patch
  patching [...]
  $</pre
 ></blockquote
 ><h3
 >With git</h3
-><div style="text-decoration: line-through"
 ><p
->To apply this patch using git, start with a git repository containing arc2 or the version of Arc that you want to patch.  Then in the git working directory, type:</p
+>In a git repository that has the same arc2 ancestor commit as mine, git-merge can be used:</p
 ><blockquote
 ><pre
->git pull git://github.com/CatDancer/arc-atomic-fix.git master</pre
+>$ git merge arc2.atomic-fix0</pre
 ></blockquote
-></div
 ><p
->Actually &ldquo;git pull&rdquo; is only going to work if the two git repositories share a common ancestor. I suspect there&rsquo;s some way to do this using git, but I haven&rsquo;t gone looking yet.</p
+>In a repository where arc2 has been checked in as a different commit, running git-merge will produce merge conflicts as it tries to apply both of the arc2 commits.  You can download and apply the patch instead:</p
+><blockquote
+><pre
+>$ git-apply arc2.mz0.patch</pre
+></blockquote
 ><h2
 >License</h2
 ><p
