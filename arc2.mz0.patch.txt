@@ -1,0 +1,12 @@
+diff --git a/ac.scm b/ac.scm
+index b16531f..fd1d0d4 100644
+--- a/ac.scm
++++ b/ac.scm
+@@ -61,6 +61,7 @@
+         ((ssyntax? s) (ac (expand-ssyntax s) env))
+         ((symbol? s) (ac-var-ref s env))
+         ((ssyntax? (xcar s)) (ac (cons (expand-ssyntax (car s)) (cdr s)) env))
++        ((eq? (xcar s) 'mz) (cadr s))
+         ((eq? (xcar s) 'quote) (list 'quote (ac-niltree (cadr s))))
+         ((eq? (xcar s) 'quasiquote) (ac-qq (cadr s) env))
+         ((eq? (xcar s) 'if) (ac-if (cdr s) env))
