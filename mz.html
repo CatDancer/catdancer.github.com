@@ -41,6 +41,20 @@ td {
 ><i
 >Allows easy access to the underlying MzScheme language that Arc is written in.</i
 ></p
+><pre
+>diff --git a/ac.scm b/ac.scm
+index b16531f..fd1d0d4 100644
+--- a/ac.scm
++++ b/ac.scm
+@@ -61,6 +61,7 @@
+         ((ssyntax? s) (ac (expand-ssyntax s) env))
+         ((symbol? s) (ac-var-ref s env))
+         ((ssyntax? (xcar s)) (ac (cons (expand-ssyntax (car s)) (cdr s)) env))
++        ((eq? (xcar s) 'mz) (cadr s))
+         ((eq? (xcar s) 'quote) (list 'quote (ac-niltree (cadr s))))
+         ((eq? (xcar s) 'quasiquote) (ac-qq (cadr s) env))
+         ((eq? (xcar s) 'if) (ac-if (cdr s) env))
+</pre
 ><p
 >This hack introduces an &ldquo;<code>mz</code>&rdquo; syntax form into Arc.  The argument to <code>mz</code> is passed through unchanged to MzScheme when the Arc expression is compiled into MzScheme. For example, to call the MzScheme procedure &ldquo;<code>current-seconds</code>&rdquo;, you can say:</p
 ><blockquote

@@ -1,0 +1,181 @@
+diff --git a/ac.scm b/ac.scm
+index b16531f..44b30d3 100644
+--- a/ac.scm
++++ b/ac.scm
+@@ -69,7 +69,7 @@
+         ; this line could be removed without changing semantics
+         ((eq? (xcar (xcar s)) 'compose) (ac (decompose (cdar s) (cdr s)) env))
+         ((pair? s) (ac-call (car s) (cdr s) env))
+-        (#t (err "Bad object in expression" s))))
++        (#t s)))
+ 
+ (define (literal? x)
+   (or (boolean? x)
+@@ -772,17 +772,58 @@
+                                 (current-output-port)))
+                 b))
+ 
++(define (print-table f port x)
++  (display "{" port)
++  (let ((first #t))
++    (hash-table-for-each x
++      (lambda (k v)
++        (if (not first) (display " " port))
++        (print* f port k)
++        (display " " port)
++        (print* f port v)
++        (set! first #f))))
++  (display "}" port))
++
++(define (print* f port x)
++
++  (define (print x)
++    (cond ((pair? x)
++           (display "(" port)
++           (print (car x))
++           (print-cdr (cdr x)))
++          ((hash-table? x)
++           (print-table f port x))
++          (#t
++           (f x port))))
++
++  (define (print-cdr y)
++    (cond ((or (eq? y 'nil) (eq? y '()))
++           (display ")" port))
++          ((pair? y)
++           (display " " port)
++           (print (car y))
++           (print-cdr (cdr y)))
++          (#t
++           (display " . " port)
++           (print y)
++           (display ")" port))))
++
++  (print x))
++
++(define (write*   x port) (print* write   port x))
++(define (display* x port) (print* display port x))
++
+ (define (printwith f args)
+   (let ((port (if (> (length args) 1)
+                   (cadr args)
+                   (current-output-port))))
+     (when (pair? args)
+-      (f (ac-denil (car args)) port))
++      (f (car args) port))
+     (flush-output port))
+     'nil)
+ 
+-(xdef 'write (lambda args (printwith write   args)))
+-(xdef 'disp  (lambda args (printwith display args)))
++(xdef 'write (lambda args (printwith write*   args)))
++(xdef 'disp  (lambda args (printwith display* args)))
+ 
+ ; sread = scheme read. eventually replace by writing read
+ 
+@@ -951,7 +992,7 @@
+         (if (eqv? expr ':a)
+             'done
+             (let ((val (arc-eval expr)))
+-              (write (ac-denil val))
++              (write* val (current-output-port))
+               (namespace-set-variable-value! '_that val)
+               (namespace-set-variable-value! '_thatexpr expr)
+               (newline)
+diff --git a/as.scm b/as.scm
+index a08837c..bcc0f68 100644
+--- a/as.scm
++++ b/as.scm
+@@ -8,6 +8,8 @@
+ (load "ac.scm") 
+ (require "brackets.scm")
+ (use-bracket-readtable)
++(require "readtable.scm")
++(use-table-readtable)
+ 
+ (aload "arc.arc")
+ (aload "libs.arc") 
+diff --git a/readtable.scm b/readtable.scm
+new file mode 100644
+index 0000000..f7c246d
+--- /dev/null
++++ b/readtable.scm
+@@ -0,0 +1,41 @@
++; By Cat Dancer, cat@catdancer.ws
++; This code is released to the public domain, except for
++; the copy of ac-niltree, which is a part of Arc.
++
++(module readtable mzscheme
++
++(require "skipwhite.scm")
++
++; need a copy of ac-niltree as long as the reader reads
++; MzScheme lists instead of Arc lists
++
++(define (ac-niltree x)
++  (cond ((pair? x) (cons (ac-niltree (car x)) (ac-niltree (cdr x))))
++        ((or (eq? x #f) (eq? x '())) 'nil)
++        (#t x)))
++
++(define (readnil port)
++  (ac-niltree (read port)))
++
++(define (slurp port a)
++  (skip-whitespace port)
++  (if (eq? (peek-char port) #\})
++      (begin (read-char port)
++             a)
++      (let ((k (readnil port)))
++        (let ((v (readnil port)))
++          (hash-table-put! a k v)
++          (slurp port a)))))
++
++(define (parse-table ch port src line col pos)
++  (slurp port (make-hash-table 'equal)))
++
++(define (table-readtable)
++  (make-readtable (current-readtable) #\{ 'non-terminating-macro parse-table))
++
++(provide use-table-readtable)
++
++(define (use-table-readtable)
++  (current-readtable (table-readtable)))
++
++)
+diff --git a/skipwhite.scm b/skipwhite.scm
+new file mode 100644
+index 0000000..dac91f3
+--- /dev/null
++++ b/skipwhite.scm
+@@ -0,0 +1,31 @@
++; place in own library to abide by the LGPL
++;
++; skip-whitespace is copied from
++; http://download.plt-scheme.org/doc/352/html/mzscheme/mzscheme-Z-H-11.html#node_sec_11.2.8
++; which has the following licence:
++;
++; Copyright ©1995-2006 Matthew Flatt
++;
++; Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Library General Public License, Version 2 published by the Free Software Foundation.
++;
++; [ ] in source changed to ( ) to avoid conflict with brackets.scm
++
++(module skipwhite mzscheme
++
++(provide skip-whitespace)
++
++(define (skip-whitespace port)
++  ;; Skips whitespace characters, sensitive to the current
++  ;; readtable's definition of whitespace
++  (let ((ch (peek-char port)))
++    (unless (eof-object? ch)
++      ;; Consult current readtable:
++      (let-values (((like-ch/sym proc dispatch-proc)
++                    (readtable-mapping (current-readtable) ch)))
++        ;; If like-ch/sym is whitespace, then ch is whitespace
++        (when (and (char? like-ch/sym)
++                   (char-whitespace? like-ch/sym))
++          (read-char port)
++          (skip-whitespace port))))))
++
++)

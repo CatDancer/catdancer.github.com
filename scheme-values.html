@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+><title
+>scheme-values</title
+><style type="text/css"
+>
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p, ol {
+  width: 40em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+
+</style
+></head
+><body
+><a href="/"
+>Cat’s hacks</a
+>:<h1
+>scheme-values</h1
+><p
+><i
+>Allows Scheme values to pass through the Arc compiler.</i
+></p
+><pre
+>diff --git a/ac.scm b/ac.scm
+index b16531f..121d3d2 100644
+--- a/ac.scm
++++ b/ac.scm
+@@ -69,7 +69,7 @@
+         ; this line could be removed without changing semantics
+         ((eq? (xcar (xcar s)) 'compose) (ac (decompose (cdar s) (cdr s)) env))
+         ((pair? s) (ac-call (car s) (cdr s) env))
+-        (#t (err &#34;Bad object in expression&#34; s))))
++        (#t s)))
+ 
+ (define (literal? x)
+   (or (boolean? x)
+</pre
+><h2
+>Get This Hack</h2
+><ul
+><li
+><a href="http://catdancer.github.com/arc2.scheme-values0.patch.txt" target="_blank"
+>diff against arc2</a
+></li
+><li
+><a href="http://github.com/CatDancer/arc/tree/arc2.scheme-values0"
+>repository on GitHub</a
+></li
+><li
+><a href="http://github.com/CatDancer/arc/tarball/arc2.scheme-values0"
+>download a tarball of arc2 with this patch applied</a
+></li
+></ul
+><h2
+>Apply This Hack to Your Arc</h2
+><p
+>By using patch or git, you can incorporate this patch into your version of Arc.</p
+><h3
+>With patch</h3
+><p
+>To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/arc2.scheme-values0.patch"
+>arc2.scheme-values0.patch</a
+> into your Arc directory, and at the Unix command line inside the Arc directory, type:</p
+><blockquote
+><pre
+> patch &#60;arc2.scheme-values0.patch</pre
+></blockquote
+><p
+>&ldquo;<code>patch</code>&rdquo; is a standard utility that comes with Unix.  (If you&rsquo;re running Windows, iirc <code>patch</code> comes with cygwin).</p
+><p
+>For example,</p
+><blockquote
+><pre
+> $ wget http://ycombinator.com/arc/arc2.tar
+ [... downloading ...]
+ $ tar xf arc2.tar
+ $ cd arc2
+ $ patch &#60;arc2.scheme-values0.patch
+ patching [...]
+ $</pre
+></blockquote
+><h3
+>With git</h3
+><p
+>In a git repository that has the same arc2 ancestor commit as mine, git-merge can be used:</p
+><blockquote
+><pre
+>$ git merge arc2.scheme-values0</pre
+></blockquote
+><p
+>In a repository where arc2 has been checked in as a different commit, running git-merge will produce merge conflicts as it tries to apply both of the arc2 commits.  You can download and apply the patch instead:</p
+><blockquote
+><pre
+>$ git-apply arc2.mz0.patch</pre
+></blockquote
+><h2
+>License</h2
+><p
+><a href="http://creativecommons.org/licenses/publicdomain/"
+>public domain</a
+></p
+></body
+></html
+>
