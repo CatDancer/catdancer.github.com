@@ -37,6 +37,8 @@ td {
 >Cat’s hacks</a
 >:<h2
 >Sharing Arc hacks</h2
+><h3
+>Hacking and patches</h3
 ><p
 >Arc is a highly hackable language, so we can expect that programmers will create many Arc hacks.  Some will be good, some bad, some experimental, some very interesting.  Some hacks may be highly useful for a particular project but a bad idea for Arc in general.</p
 ><p
@@ -57,8 +59,10 @@ td {
 >What if it were as easy and comfortable to choose which patches you wanted in your Arc as it is in other languages to choose which libraries you wanted to use?</p
 ><p
 >I suspect there may be some unexpected benefits.  As one example, when code just does what is needs to do like <code>(do (a) (b) (c))</code> it’s easy to see what it’s doing.  But then some people need different things and so we start getting configuration options like <code>(do (if config*!a (a)) (if config*!b (b)) ...)</code>.  I’ve seen libraries where there is more code dealing with configuration options specifying what to do then there is code to do the actual thing that the library is supposed to do.  What if the code was so clear and patches so easy that it would be as easy to specify a patch to set the code to <code>(do (a) (c))</code> as it would be to write a configuration file?</p
+><h3
+>Using git</h3
 ><p
->I’ve been playing around with git, wondering if git was a good choice for sharing Arc hacks, and if so, which git entity (repositories, branches, tags...) would be best to use for one hack.  It turns out that tags work well.</p
+>I’ve been playing around with git, wondering if git was a good choice for sharing Arc hacks, and if so, which git entity (repositories, branches, tags...) would be best to use for one hack.  From what I can tell so far, it looks like tags work well.</p
 ><p
 >Suppose, for example, that you happened to want arc2 with my date and atomic fixes, my patch to read and write Arc tables, and nothing else that wasn’t needed for those hacks.  Here’s how to do it with git (git’s output not shown):</p
 ><blockquote
@@ -132,7 +136,7 @@ td {
 >git repository on github</a
 >, each one independently accessible as a separate tag.</p
 ><p
->Many of these hacks are tiny, for example, arc2.testify-iso0 lets you pass in a list as the test argument to the functions that use testify:</p
+>Many of these hacks are tiny.  For example, arc2.testify-iso0 lets you pass in a list as the test argument to the functions that use testify:</p
 ><blockquote
 ><pre
 >
@@ -141,7 +145,7 @@ td {
 </pre
 ></blockquote
 ><p
->the patch adds one letter to the Arc source code, changing a call to <code>is</code> to a call to <code>iso</code>:</p
+>the patch adds one letter to the Arc source code, changing a call to <code>is</code> to <code>iso</code>:</p
 ><blockquote
 ><pre
 >
