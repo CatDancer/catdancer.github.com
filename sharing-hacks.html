@@ -64,7 +64,7 @@ td {
 ><p
 >I’ve been playing around with git, wondering if git was a good choice for sharing Arc hacks, and if so, which git entity (repositories, branches, tags...) would be best to use for one hack.  From what I can tell so far, it looks like tags work well.</p
 ><p
->Suppose, for example, that you happened to want arc2 with my date and atomic fixes, my patch to read and write Arc tables, and nothing else that wasn’t needed for those hacks.  Here’s how to do it with git (git’s output not shown):</p
+>Suppose, for example, that you happened to want arc2 with my date and atomic fixes, my patch to read and write Arc tables, and nothing else that wasn’t needed for those hacks.  Here’s how to do it with git (git’s output is not shown.  Also, this assumes that you’re using my commit of arc2; see the next section if you’re starting with a different commit of arc2):</p
 ><blockquote
 ><pre
 >
@@ -158,6 +158,68 @@ td {
 >You can see a pretty colored version of the commit on <a href="http://github.com/CatDancer/arc/commit/a1753d2fc5dc9cb841b3172e2b42f9a15be6bc65"
 >github</a
 >.</p
+><h3
+>Dealing with different ancestor commits</h3
+><p
+>The example above of merging patches went very smoothly, but it did assume that you were starting with my commit of arc2.  Suppose instead you started with your own:</p
+><blockquote
+><pre
+>
+ $ wget http://ycombinator.com/arc/arc2.tar
+ $ tar xf arc2.tar
+ $ cd arc2
+ $ git init
+ $ git add .
+ $ git commit -m 'initial version'
+</pre
+></blockquote
+><p
+>Now you can fetch a patch of mine:</p
+><blockquote
+><pre
+>
+ $ git fetch git://github.com/CatDancer/arc.git tag arc2.date0
+</pre
+></blockquote
+><p
+>But now if you try to merge the patch you’ll get conflicts:</p
+><blockquote
+><pre
+>
+ $ git merge arc2.date0
+ Auto-merging ac.scm
+ CONFLICT (add/add): Merge conflict in ac.scm
+ Auto-merging arc.arc
+ CONFLICT (add/add): Merge conflict in arc.arc
+ Automatic merge failed; fix conflicts and then commit the result.
+</pre
+></blockquote
+><p
+>The problem is that git knows that arc2.date0 is a patch to my commit of arc2, but it doesn’t know that your checkin of arc2 can be treated the same as my commit.</p
+><p
+>There’s an easy fix.  First let’s get rid of the failed merge and revert back to your checkin of arc2 that you had before:</p
+><blockquote
+><pre
+>
+ $ git reset --hard
+</pre
+></blockquote
+><p
+>By “merging” my arc2 into your checkin of arc2, git will know that they don’t conflict.</p
+><blockquote
+><pre
+>
+ $ git merge arc2
+</pre
+></blockquote
+><p
+>None of the files actually change in this merge commit, since after all your checkin of arc2 and my commit of arc2 are the same.  But now the merge of my patch goes smoothly:</p
+><blockquote
+><pre
+>
+ $ git merge arc2.date0
+</pre
+></blockquote
 ><h2
 >Comment</h2
 ><a href="http://arclanguage.org/item?id=9137"
