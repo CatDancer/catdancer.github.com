@@ -12,7 +12,7 @@ body {
   margin-left: 2em;
 }
 
-p, ol {
+p, ol, ul {
   width: 40em;
 }
 
@@ -102,17 +102,19 @@ td {
 >$ git merge arc2.atomic-fix0</pre
 ></blockquote
 ><p
->In a repository where arc2 has been checked in as a different commit, running git-merge will produce merge conflicts as it tries to apply both of the arc2 commits.  You can download and apply the patch instead:</p
-><blockquote
-><pre
->$ git-apply arc2.mz0.patch</pre
-></blockquote
+>In a repository where arc2 has been checked in as a different commit, running git-merge will produce merge conflicts as it tries to apply both of the arc2 commits.  See the instructions at the end of <a href="sharing-hacks.html"
+>Sharing Hacks</a
+> for how to resolve the conflict.</p
 ><h2
 >License</h2
 ><p
-><a href="http://creativecommons.org/licenses/publicdomain/"
+>The original Arc source is copyrighted by Paul Graham and Robert Morris and licensed under the Perl Foundations's Artistic License 2.0 as described in the “copyright” file in the Arc distribution.</p
+><p
+>My <i>changes</i> to Arc (this patch that I wrote) are in the <a href="http://creativecommons.org/licenses/publicdomain/"
 >public domain</a
-></p
+>.</p
+><p
+>The <i>combination</i> of the original Arc and my changes together (what you get after you apply my patch) is also licensed under the Perl Foundations's Artistic License 2.0.</p
 ></body
 ></html
 >
