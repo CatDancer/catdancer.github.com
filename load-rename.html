@@ -47,7 +47,7 @@ td {
 >Conventionally, libraries are supposed to carefully hide away their internals to avoid just this kind of conflict.  There’s a couple of problems with this approach though:</p
 ><ul
 ><li
->The library author doesn’t <i>know</i> how the library is going to be used, so the effort made to avoid conflicts is speculative: time may be spent hidding a function which as it happens may never cause a conflict in the future, or if the function <i>hadn’t</i> been hidden away it might have turned out to be useful to other code in ways that the library author hadn’t thought of.</li
+>The library author doesn’t <i>know</i> how the library is going to be used, so the effort made to avoid conflicts is speculative: time may be spent hidding a function which as it turns out never would have caused a conflict in the future, or if the function <i>hadn’t</i> been hidden away it might have turned out to be useful to other code in ways that the library author hadn’t thought of.</li
 ><li
 >Even after going to the extra work and attendent code complication of hiding library internals, the library may <i>still</i> be making names visible which conflict with some future use of the library.</li
 ></ul
