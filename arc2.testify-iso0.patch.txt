@@ -1,0 +1,13 @@
+diff --git a/arc.arc b/arc.arc
+index c2b6805..050dde1 100644
+--- a/arc.arc
++++ b/arc.arc
+@@ -208,7 +208,7 @@
+      start)))
+ 
+ (def testify (x)
+-  (if (isa x 'fn) x [is _ x]))
++  (if (isa x 'fn) x [iso _ x]))
+ 
+ (def some (test seq)
+   (let f (testify test)
