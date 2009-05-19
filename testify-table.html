@@ -70,6 +70,14 @@ table.code td.spacer {
 ><i
 >Treat tables like functions in Arc's list sequence functions</i
 ></p
+><h3
+>Why not to use this patch</h3
+><p
+>When structs or objects are implemented as tables, code such as “take these objects out of my list of objects” will stop working with this patch.  See <a href="http://news.ycombinator.com/item?id=616071"
+>Duplicates appearing in HN top?</a
+> for an example.</p
+><h3
+>Description</h3
 ><p
 >Arc comes with a number of functions that apply a function to successive elements of a sequence.  From the <a href="http://ycombinator.com/arc/tut.txt"
 >Arc tutorial</a
