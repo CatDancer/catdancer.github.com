@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+><title
+>Thank you pg and rtm!</title
+><style type="text/css"
+>
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p, ol, ul {
+  width: 40em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+table.code {
+  border-collapse: collapse;
+}
+
+table.code td {
+  padding: 5px 1em;
+  font-family: courier, monospace;
+  border: 1px solid #ddd;
+}
+
+table.code td.arrow {
+  border: none;
+  padding: 0 1em;
+  font-family: verdana;
+}
+
+table.code td.spacer {
+  border: none;
+  padding: 0;
+}
+
+
+</style
+></head
+><body>
+
+<h1>Thank you pg and rtm!</h1>
+
+<p>I’ve been programming in Arc seriously for about six months now, so I thought this would be a nice time to pause and thank Paul Graham and Robert Morris for this language I find so delightful.</p>
+
+<p>I’ve long liked Lisp, but hadn’t been programming in Lisp for a long time because I hadn’t found any features in Lisp compelling enough to overcome the advantage other languages had in having large libraries available and such like.</p>
+
+<p>At one point I had gotten into trying out macros, but I was programming in Scheme (which generally I liked) and so thought I should be using hygienic macros.  I found the rationale of hygienic macros -- avoiding all possibility of conflicting identifiers in macro expansions -- to be compelling.  After all, who would want to write a macro that breaks just because the user happens to be using a variable of the same name as one used in the macro?  And the Scheme implementers went to a lot of trouble to create this nifty technology to avoid hygiene problems, so surely I’d want to use it?  Yet when I tried writing macros, I found it hard to write any that were actually helpful to me.</p>
+
+<p>I now understand that all these language features that people work hard to create solve some problem, and it can be a useful and important problem to solve, and yet it can be a problem I don’t care about, a problem I don’t have.  That doesn’t necessarily make it a <i>bad</i> language feature, but it can make it one that I don’t want to pay the cost of using.</p>
+
+<p>Some years ago I read Refactoring by Martin Fowler.  The first part of this book is a great explanation of why good design matters, of all the things like code duplication that you can get rid of to have better code.  Like Martin Fowler says himself, there’s nothing new in the section, all the principles mentioned have been known for a long time.  But it’s a really nice writeup.</p>
+
+<p>The second half of the book is how to apply the principles to Java code.  Which is horrendous!  Not the book.  If you should be so unfortunate to be stuck trying to write good code in Java, the book is a great, lucid description of how to do so.  Yet in Java, it’s hard to get anything shorter than ten or twenty lines of code.  See some code duplication, and by the time you’ve written the classes and interfaces and methods you need to write to remove the duplication, the code is just as long as it was before.</p>
+
+<p>Languages written by hackers for hackers like Perl and Ruby and Python are lots better (and, I find for myself, a lot more productive for me for the kinds of projects I work on), and I can write shorter programs in them, yet they don’t help me go further.  They help me write good programs, but if I still have some pattern of duplicated code (after I’ve gotten rid of the obvious like factoring out into functions as much as I can and so on), they don’t help <i>me</i> make <i>my</i> program shorter.  I’d need to create a Perl++ or a Ruby++, create a new language to implement a new syntactic construct to do that.</p>
+
+<p>Now I see some pattern in my code, if I’m doing more typing than I want to be doing, BAM I write a macro and use it.  Just like that.  And the macro may be ugly, it might not be something that I’d ever want to use in another program, but that’s OK.  It fixes my problem.  And I press on with my project.</p>
+
+<p>Arc is the first language I’ve programmed in that I feel like doesn’t get in my way.  I have all the useful issues in my project, browser incompatibility problems despite wonderful libraries like JQuery, algorithms that I’m figuring out and so on.  Yet I’m not struggling with <i>Arc</i>.</p>
+
+<p>With every other language I’ve programmed in, even the ones written by hackers for hackers, there’s a translation step.  First I figure out how to do what I need to do, then I translate that into the constructs of the language, then I try it and it doesn’t work, and then I debug or figure it out :-).  With Arc I’m still doing the figuring out how to implement the feature, and I’m still doing the debugging (!), but the implementation I can just do.  It’s like drawing with a pencil as instead of using an etch-a-sketch.</p>
+
+<p>The other thing that impresses me about Arc is a consequence of the succinctness of the Arc implementation itself.  Paul Graham’s hypothesis is that succinctness is power, that a language that enables you to write succinct programs is a powerful programming language.  As part of applying (or testing?) this theory,  Arc itself is written in a concise way.  Which, as it turns out, makes it easy to hack.</p>
+
+<p>There’s stuff that Arc doesn’t do (perhaps even, as Arc’s voracious critics might say, a lot that Arc doesn’t do) yet anything I’ve needed I’ve found quick and easy to add or change.  Like some of the macros I’ve written, some of my hacks to Arc are pretty ugly and I wouldn’t recommend to anyone else, or even use for another program.  But. I <i>can</i> hack Arc.  And it’s <i>easy</i>.</p>
+
+<p>Thank you pg and rtm, for Arc.  I find the language a pleasure to program in.</p>
+
+<p>By the way, when Arc first came out, and many months before I started writing serious programs in the language, I read through the implementation of Arc, the source code file arc.arc.  There’s a pleasure in simplicity, like the pleasure of looking at a drawing that captures the essence of a flower with just a few strokes.  There’s a similar pleasure in reading the Arc source, in seeing how it does what it does so simply.  It’s a pleasure I recommend to any programmer.  Check it out.</p>
+
+<p>cat@catdancer.ws</p>
+
+</body>
+</html>
