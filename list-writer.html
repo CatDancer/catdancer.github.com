@@ -69,6 +69,12 @@ table.code td.spacer {
 ><p
 >By itself this patch is supposed to produce the same output as <code>arc2</code> does.  (If it doesn’t, that would be a bug).</p
 ><h2
+>Bugs</h2
+><ul
+><li
+>Attempting to write a list containing a cycle will enter an infinite loop and crash MzScheme by consuming all available memory.</li
+></ul
+>Have fixes?  Send them to me on <a href="http://github.com/CatDancer/arc/tree">GitHub</a>.<h2
 >Get This Hack</h2
 ><ul
 ><li
