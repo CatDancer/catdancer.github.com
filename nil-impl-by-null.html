@@ -74,6 +74,8 @@ table.code td.spacer {
 ><li
 >I took a weed-wacker to ac.scm and blindly removed all the ac-denil’s and ac-niltree’s.  I did no analysis of the code I was changing, so I expect I probably messed some things up. The extent of my testing was to run the patched Arc on one of my web pages and see that it didn’t crash.  But hey, it ran 7% faster.</li
 ><li
+>I see one mistake already: I took out the check for setting nil when I should have changed it to check for setting '().</li
+><li
 >This patch depends on the list-writer patch to print <code>nil</code> as <code>nil</code>, and so shares that patch’s bug that writing lists containing cycles will go into an infinite loop, consume all your memory, and crash MzScheme.</li
 ></ul
 >Have fixes?  Send them to me on <a href="http://github.com/CatDancer/arc/tree">GitHub</a>.<h2
