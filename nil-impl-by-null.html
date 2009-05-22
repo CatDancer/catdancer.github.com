@@ -2,7 +2,7 @@
 ><head
 ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
 ><title
->Speculative patch implementing Arc's nil by MzScheme's null</title
+>Speculative patch implementing Arc's nil with MzScheme's null</title
 ><style type="text/css"
 >
 
@@ -60,10 +60,10 @@ table.code td.spacer {
 >nil-impl-by-null</h1
 ><p
 ><i
->Speculative patch implementing Arc's nil by MzScheme's null</i
+>Speculative patch implementing Arc's nil with MzScheme's null</i
 ></p
 ><p
->This rough patch to arc2 tries out implementing Arc’s <code>nil</code> internally by MzScheme’s <code>null</code> <code>'()</code>, instead of using MzScheme's <code>nil</code> symbol.</p
+>This rough patch to arc2 tries out implementing Arc’s <code>nil</code> internally with MzScheme’s <code>null</code> <code>'()</code>, instead of using MzScheme's <code>nil</code> symbol.</p
 ><p
 >From inside of Arc nothing has changed: lists are still terminated by <code>nil</code>, <code>nil</code> is still a symbol, <code>nil</code> still reads and prints as <code>nil</code>, and so on.  Only the internal representation of <code>nil</code> has changed.</p
 ><p
