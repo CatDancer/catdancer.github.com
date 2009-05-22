@@ -65,7 +65,7 @@ table.code td.spacer {
 ><p
 >This rough patch to arc2 tries out implementing Arc’s <code>nil</code> internally by MzScheme’s <code>null</code> <code>'()</code>, instead of using MzScheme's <code>nil</code> symbol.</p
 ><p
->From inside of Arc nothing has changed: lists are still terminated by <code>nil</code>, <code>nil</code> is still a symbol, and so on.  Only the internal representation of <code>nil</code> has changed.</p
+>From inside of Arc nothing has changed: lists are still terminated by <code>nil</code>, <code>nil</code> is still a symbol, <code>nil</code> still reads and prints as <code>nil</code>, and so on.  Only the internal representation of <code>nil</code> has changed.</p
 ><p
 >This simplifies the Arc compiler since it doesn’t have to convert back and forth between <code>nil</code> and <code>'()</code> all the time.</p
 ><h2
