@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+><title
+>Show line numbers in some error messages</title
+><style type="text/css"
+>
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p, ol, ul {
+  width: 40em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+table.code {
+  border-collapse: collapse;
+}
+
+table.code td {
+  padding: 5px 1em;
+  font-family: courier, monospace;
+  border: 1px solid #ddd;
+}
+
+table.code td.arrow {
+  border: none;
+  padding: 0 1em;
+  font-family: verdana;
+}
+
+table.code td.spacer {
+  border: none;
+  padding: 0;
+}
+
+
+</style
+></head
+><body
+><a href="/"
+>Cat’s hacks</a
+>:<h1
+>port-line-counting</h1
+><p
+><i
+>Show line numbers in some error messages</i
+></p
+><p
+>This patch turns on MzScheme’s port line counting feature.  This means that some Arc errors will now display the line number of the error.</p
+>buggy.arc:<blockquote
+><pre
+>
+ 1: (def a (x)
+ 2:   (+ 3 x))
+ 3:
+ 4: (def b (y)
+ 5:   (* y 4)  ;; &#60;--- missing close parenthesis
+ 6:
+ 7: (def c (z)
+ 8:   (/ (b z) 4))
+</pre
+></blockquote
+><p
+>Before:</p
+><blockquote
+><pre
+>
+ arc&#62; (load &#34;buggy.arc&#34;)
+ Error: &#34;buggy.arc::23: read: expected a ')'&#34;
+</pre
+></blockquote
+><p
+>After:</p
+><blockquote
+><pre
+>
+  arc&#62; (load &#34;buggy.arc&#34;)
+  Error: &#34;buggy.arc:4:0: read: expected a ')'&#34;
+</pre
+></blockquote
+><h2
+>Get This Hack</h2
+><ul
+><li
+><a href="http://catdancer.github.com/arc2.port-line-counting0.patch.txt" target="_blank"
+>diff against arc2</a
+></li
+><li
+><a href="http://github.com/CatDancer/arc/tree/arc2.port-line-counting0"
+>repository on GitHub</a
+></li
+><li
+><a href="http://github.com/CatDancer/arc/tarball/arc2.port-line-counting0"
+>download a tarball of arc2 with this patch applied</a
+></li
+></ul
+><h2
+>Apply This Hack to Your Arc</h2
+><p
+>By using patch or git, you can incorporate this patch into your version of Arc.</p
+><h3
+>With patch</h3
+><p
+>To apply this patch to your copy of arc using the patch command, download <a href="http://catdancer.github.com/arc2.port-line-counting0.patch"
+>arc2.port-line-counting0.patch</a
+> into your Arc directory, and at the Unix command line inside the Arc directory, type:</p
+><blockquote
+><pre
+> patch &#60;arc2.port-line-counting0.patch</pre
+></blockquote
+><p
+>&ldquo;<code>patch</code>&rdquo; is a standard utility that comes with Unix.  (If you&rsquo;re running Windows, iirc <code>patch</code> comes with cygwin).</p
+><p
+>For example,</p
+><blockquote
+><pre
+> $ wget http://ycombinator.com/arc/arc2.tar
+ [... downloading ...]
+ $ tar xf arc2.tar
+ $ cd arc2
+ $ patch &#60;arc2.port-line-counting0.patch
+ patching [...]
+ $</pre
+></blockquote
+><h3
+>With git</h3
+><p
+>In a git repository that has the same arc2 ancestor commit as mine, git-merge can be used:</p
+><blockquote
+><pre
+>$ git merge arc2.port-line-counting0</pre
+></blockquote
+><p
+>In a repository where arc2 has been checked in as a different commit, running git-merge will produce merge conflicts as it tries to apply both of the arc2 commits.  See the instructions at the end of <a href="sharing-hacks.html"
+>Sharing Hacks</a
+> for how to resolve the conflict.</p
+><h2
+>License</h2
+><p
+>The original Arc source is copyrighted by Paul Graham and Robert Morris and licensed under the Perl Foundations's Artistic License 2.0 as described in the “copyright” file in the Arc distribution.</p
+><p
+>My <i>changes</i> to Arc (this patch that I wrote) are in the <a href="http://creativecommons.org/licenses/publicdomain/"
+>public domain</a
+>.</p
+><p
+>The <i>combination</i> of the original Arc and my changes together (what you get after you apply my patch) is also licensed under the Perl Foundations's Artistic License 2.0.</p
+></body
+></html
+>

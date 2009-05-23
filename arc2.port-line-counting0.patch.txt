@@ -1,0 +1,13 @@
+diff --git a/as.scm b/as.scm
+index a08837c..8f6d6b0 100644
+--- a/as.scm
++++ b/as.scm
+@@ -5,6 +5,8 @@
+ 
+ (require mzscheme) ; promise we won't redefine mzscheme bindings
+ 
++(port-count-lines-enabled #t)
++
+ (load "ac.scm") 
+ (require "brackets.scm")
+ (use-bracket-readtable)
