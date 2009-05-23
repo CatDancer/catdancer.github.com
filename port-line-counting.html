@@ -2,7 +2,7 @@
 ><head
 ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
 ><title
->Show line numbers in some error messages</title
+>Show the line number in some error messages</title
 ><style type="text/css"
 >
 
@@ -58,9 +58,15 @@ table.code td.spacer {
 >Cat’s hacks</a
 >:<h1
 >port-line-counting</h1
+><blockquote
+><pre
+>
+ +(port-count-lines-enabled #t)
+</pre
+></blockquote
 ><p
 ><i
->Show line numbers in some error messages</i
+>Show the line number in some error messages</i
 ></p
 ><p
 >This patch turns on MzScheme’s port line counting feature.  This means that some Arc errors will now display the line number of the error.</p
