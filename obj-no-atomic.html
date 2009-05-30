@@ -124,7 +124,22 @@ nil
 ><h2
 >Apply This Hack to Your Arc</h2
 ><p
->By using patch or git, you can incorporate this patch into your version of Arc.</p
+>By using git or patch, you can incorporate this patch into your version of Arc.</p
+><h3
+>With git</h3
+><blockquote
+><pre
+> $ git pull git://github.com/CatDancer/arc.git tag arc2.obj-no-atomic0</pre
+></blockquote
+><p
+>For example,</p
+><blockquote
+><pre
+> $ mkdir arc
+ $ cd arc
+ $ git init
+ $ git pull git://github.com/CatDancer/arc.git tag arc2.obj-no-atomic0</pre
+></blockquote
 ><h3
 >With patch</h3
 ><p
@@ -149,18 +164,6 @@ nil
  patching [...]
  $</pre
 ></blockquote
-><h3
->With git</h3
-><p
->In a git repository that has the same arc2 ancestor commit as mine, git-merge can be used:</p
-><blockquote
-><pre
->$ git merge arc2.obj-no-atomic0</pre
-></blockquote
-><p
->In a repository where arc2 has been checked in as a different commit, running git-merge will produce merge conflicts as it tries to apply both of the arc2 commits.  See the instructions at the end of <a href="sharing-hacks.html"
->Sharing Hacks</a
-> for how to resolve the conflict.</p
 ><h2
 >License</h2
 ><p
