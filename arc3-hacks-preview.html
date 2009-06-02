@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+><title
+>A preview of some arc3 hacks</title
+><style type="text/css"
+>
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p, ol, ul {
+  width: 40em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+table.code {
+  border-collapse: collapse;
+}
+
+table.code td {
+  padding: 5px 1em;
+  font-family: courier, monospace;
+  border: 1px solid #ddd;
+}
+
+table.code td.arrow {
+  border: none;
+  padding: 0 1em;
+  font-family: verdana;
+}
+
+table.code td.spacer {
+  border: none;
+  padding: 0;
+}
+
+table.foo {
+  border-collapse: collapse;
+}
+
+table.foo th {
+  border: none 0px;
+}
+
+table.foo td {
+  vertical-align: baseline;
+  padding: 1em;
+  border: 1px solid #ccc;
+}
+
+
+</style
+></head
+><body
+><a href="/"
+>Cat’s hacks</a
+>:<h2
+>A preview of some arc3 hacks</h2
+><table class="foo"
+><tr
+><th
+>Hack</th
+><th
+>Tag</th
+></tr
+><tr
+><td valign="bottom"
+><a href="exit-on-eof.html"
+>exit-on-eof</a
+><br
+>Exit Arc on ^D</td
+><td valign="bottom"
+><code
+>catdancer.arc3rc3.exit-on-eof0</code
+></td
+></tr
+><tr
+><td valign="bottom"
+><a href="table-reader-writer.html"
+>table-reader-writer</a
+><br
+>Reader / writer for Arc tables</td
+><td valign="bottom"
+><code
+>catdancer.arc3rc3.table-reader-writer0</code
+></td
+></tr
+><tr
+><td valign="bottom"
+><a href="testify-iso.html"
+>testify-iso</a
+><br
+>Allow lists to be used as the first argument to Arc's list sequence functions</td
+><td valign="bottom"
+><code
+>catdancer.arc3rc3.testify-iso0</code
+></td
+></tr
+><tr
+><td valign="bottom"
+><a href="testify-table.html"
+>testify-table</a
+><br
+>Treat tables like functions in Arc's list sequence functions</td
+><td valign="bottom"
+><code
+>catdancer.arc3rc3.testify-table0</code
+></td
+></tr
+><tr
+><td valign="bottom"
+>Merge of testify-iso and testify-table</td
+><td valign="bottom"
+><code
+>catdancer.arc3rc3.testify-table0.testify-iso0</code
+></td
+></tr
+><tr
+><td valign="bottom"
+><a href="toerr.html"
+>toerr</a
+><br
+>Send output going to stdout to stderr instead</td
+><td valign="bottom"
+><code
+>catdancer.arc3rc3.toerr0</code
+></td
+></tr
+></table
+><p style="margin-top: 2em"
+>Each hack may be applied to your copy of Arc independently.  For example, if you happened to want the table-reader-writer and the toerr hacks, you could type:</p
+><blockquote
+><pre
+>
+ $ mkdir arc
+ $ cd arc
+ $ git init
+ $ git pull git://github.com/CatDancer/arc.git tag catdancer.arc3rc3.table-reader-writer0
+ $ git pull git://github.com/CatDancer/arc.git tag catdancer.arc3rc3.toerr0
+</pre
+></blockquote
+><p
+>Your arc directory will now contain a copy of Arc with these two patches applied, along with a couple of other patches (scheme-values and list-writer) which were needed by the patches you asked for.</p
+></body
+></html
+>
