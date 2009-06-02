@@ -131,7 +131,7 @@ table.code td.spacer {
 </pre
 ></blockquote
 ><p
->As “pg.arc3” is a tag, Git will warn you that you are no longer on a branch.  This is OK, you don’t need a branch for the following, though you can work within a branch if you want to.  Then pull in any hacks that your library depends on</p
+>As “pg.arc3” is a tag, Git will warn you that you are no longer on a branch.  This is OK, you don’t need a branch for the following, though you can work within a branch if you want to.  Then pull in any hacks that your library depends on:</p
 ><blockquote
 ><pre
 >
@@ -200,7 +200,7 @@ table.code td.spacer {
 </pre
 ></blockquote
 ><p
->And then explicitly push that now non-existent tag in order to get it deleted on the remote public repository. (I try not to think too hard about the logic of this...):</p
+>and then explicitly push that now non-existent tag in order to get it deleted on the remote public repository. (no, I don’t try to think too hard about the logic of this... :)</p
 ><blockquote
 ><pre
 >
@@ -261,6 +261,10 @@ table.code td.spacer {
 >Unresolved Issues</h3
 ><p
 >Loading libraries by adding them to libs.arc will almost always produce a unnecessary conflict in libs.arc when two unrelated libraries are merged.  That can be resolved by having Arc load all the .arc files in a lib directory, but we would still need some mechanism to have libraries loaded in the right order when one library uses macros defined in another library.</p
-></body
+><h2
+>Comment</h2
+><a href="http://arclanguage.org/item?id=9481"
+>Comment</a
+> in the Arc Forum.</body
 ></html
 >
