@@ -2,7 +2,7 @@
 ><head
 ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
 ><title
->Simplify and fix mime types in srv.arc</title
+>Fix mime types in srv.arc</title
 ><style type="text/css"
 >
 
@@ -74,10 +74,12 @@ table.foo td {
 >srv-mime</h1
 ><p
 ><i
->Simplify and fix mime types in srv.arc</i
+>Fix mime types in srv.arc</i
 ></p
 ><p
->This patch to arc2 removes some code duplication in srv.arc (resulting in a codetree decrease of 17), and fixes the Content-Type MIME types produced for static files with the .css and .txt extensions.</p
+>In arc2 this hack removes some code duplication in srv.arc (resulting in a codetree decrease of 17), and fixes the Content-Type MIME types produced for static files with the .css and .txt extensions.</p
+><p
+>In arc3 the code duplication has already been removed, and so this hack simply fixes the Content-Type MIME types produced for static files with the .css and .txt extensions.</p
 ><h2
 >Get This Hack</h2
 ><ul
