@@ -82,6 +82,10 @@ table.foo td {
 >As patches and libraries become more alike and can be shared and used in the same way, I use “hack” as a generic term to mean something which is either a patch or a library, or a bit of both.</p
 ><p
 >Because I’ve just started working on this idea, the examples show using raw Git commands to pick which hacks you want.  Presumably, if this works out, we’ll eventually write some higher level commands that will be easier to use, or maybe even implement something ourselves that isn’t as complicated as Git is.</p
+><p
+>See <a href="libs.html"
+>libs</a
+> for a mechanism to load libraries using Git without getting gratuitous Git conflicts.</p
 ><h3
 >Using Git for hacks vs. using Git as a version control system</h3
 ><p
@@ -295,10 +299,6 @@ table.foo td {
 ></blockquote
 ><p
 >Now F1 will be included as one of the parent commits when we “<code>git commit</code>”, without having any of F1’s code in our working directory.</p
-><h3
->Unresolved Issues</h3
-><p
->Loading libraries by adding them to libs.arc will almost always produce a unnecessary conflict in libs.arc when two unrelated libraries are merged.  That can be resolved by having Arc load all the .arc files in a lib directory, but we would still need some mechanism to have libraries loaded in the right order when one library uses macros defined in another library.</p
 ><h2
 >Comment</h2
 ><a href="http://arclanguage.org/item?id=9481"
