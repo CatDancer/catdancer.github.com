@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html
+><head
+><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+><title
+>defvar: create your own implementation of a global variable</title
+><style type="text/css"
+>
+
+
+body {
+  font-family: verdana;
+  margin-left: 2em;
+}
+
+p, ol, ul {
+  width: 40em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+pre, code {
+  font-family: courier;
+}
+
+td {
+  vertical-align: top;
+  padding: 0 1em 0.5em 0;
+}
+
+table.code {
+  border-collapse: collapse;
+}
+
+table.code td {
+  padding: 5px 1em;
+  font-family: courier, monospace;
+  border: 1px solid #ddd;
+}
+
+table.code td.arrow {
+  border: none;
+  padding: 0 1em;
+  font-family: verdana;
+}
+
+table.code td.spacer {
+  border: none;
+  padding: 0;
+}
+
+table.foo {
+  border-collapse: collapse;
+}
+
+table.foo th {
+  border: none 0px;
+}
+
+table.foo td {
+  vertical-align: baseline;
+  padding: 1em;
+  border: 1px solid #ccc;
+}
+
+
+</style
+></head
+><body
+><a href="/"
+>Cat’s hacks</a
+>:<h2
+>defvar: create your own implementation of a global variable</h2
+><blockquote
+><pre
+>diff --git a/ac.scm b/ac.scm
+index 3f1663b..65b95d7 100644
+--- a/ac.scm
++++ b/ac.scm
+@@ -188,10 +188,15 @@
+ (define (ac-global-name s)
+   (string-&#62;symbol (string-append &#34;_&#34; (symbol-&#62;string s))))
+ 
++(define _defined-var* (make-hash-table 'equal))
++
++(define (defined-var? s)
++  (not (ar-false? (hash-table-get _defined-var* s #f))))
++
+ (define (ac-var-ref s env)
+-  (if (lex? s env)
+-      s
+-      (ac-global-name s)))
++  (cond ((lex? s env)     s)
++        ((defined-var? s) (list (ac-global-name s)))
++        (#t               (ac-global-name s))))
+ 
+ ; quasiquote
+ 
+@@ -366,6 +371,7 @@
+                (cond ((eqv? a 'nil) (err &#34;Can't rebind nil&#34;))
+                      ((eqv? a 't) (err &#34;Can't rebind t&#34;))
+                      ((lex? a env) `(set! ,a zz))
++                     ((defined-var? a) `(,(ac-global-name a) zz))
+                      (#t `(namespace-set-variable-value! ',(ac-global-name a) 
+                                                          zz)))
+                'zz))
+</pre
+></blockquote
+><blockquote
+><pre
+>(mac defvar (name impl)
+  `(do (ac-set-global ',name ,impl)
+       (set (defined-var* ',name))
+       nil))
+
+(mac defvar-impl (name)
+  (let gname (ac-global-name name)
+    `(ac-scheme ,gname)))
+
+(mac undefvar (name)
+  `(do (wipe (defined-var* ',name))
+       (wipe ,name)))
+  </pre
+></blockquote
+><p
+>When you have a function that only ever appears in your code as a call with no arguments:</p
+><blockquote
+><pre
+>
+ (stdout)
+</pre
+></blockquote
+><p
+>then the parentheses are redundant; you could have shorter code if you could type:</p
+><blockquote
+><pre
+>
+ stdout
+</pre
+></blockquote
+><p
+>This hack provides for a way to provide your own implementation for a global variable, to say what happens when the variable is used or set:</p
+><blockquote
+><pre
+>
+ arc&#62; (def foo ()
+        (prn &#34;Oh hi, this is foo, I'm going to return 5.&#34;)
+        5)
+ #&#60;procedure: foo&#62;
+ arc&#62; (defvar a foo)
+ nil
+ arc&#62; a
+ Oh hi, this is foo, I'm going to return 5.
+ 5
+</pre
+></blockquote
+><p
+><code>foo</code> is now providing the implementation for the global variable <code>a</code>; when the variable is used in an expression, <code>foo</code> is called and the value of the variable is what is returned by <code>foo</code>.</p
+><p
+>If the variable is set, the implementing function is called with a single argument, the value the variable is being set to:</p
+><blockquote
+><pre
+>
+ arc&#62; (def foo args
+        (if args
+             (prn &#34;Being set to &#34; (car args) &#34;.&#34;)
+             (do (prn &#34;Returning 5.&#34;)
+                 5)))
+ #&#60;procedure: foo&#62;
+ arc&#62; (defvar a foo)
+ nil
+ arc&#62; (++ a)
+ Returning 5.
+ Being set to 6.
+ 6
+</pre
+></blockquote
+><h3
+>Get This Hack</h3
+><p
+>This hack needs the “ac” and “defvar” patches applied to Arc:</p
+><blockquote
+><pre
+>
+ $ wget http://ycombinator.com/arc/arc3.tar
+ $ tar xf arc3.tar
+ $ cd arc3
+ $ wget -O - http://catdancer.github.com/ac0.patch | patch
+ $ wget -O - http://catdancer.github.com/defvar0.patch | patch
+</pre
+></blockquote
+><p
+>And you’ll need the “ac” and “defvar” libraries as well:</p
+><blockquote
+><pre
+>
+ $ wget http://catdancer.github.com/ac0.arc
+ $ wget http://catdancer.github.com/defvar0.arc
+ $ mzscheme -m -f as.scm
+ Use (quit) to quit, (tl) to return here after an interrupt.
+ arc&#62; (load &#34;ac0.arc&#34;)
+ nil
+ arc&#62; (load &#34;defvar0.arc&#34;)
+ nil
+</pre
+></blockquote
+></body
+></html
+>
