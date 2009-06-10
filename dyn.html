@@ -79,7 +79,7 @@ table.foo td {
 ><p
 >Arc uses these MzScheme parameters for stdin and stdout, which is why <code>tostring</code> can locally reassign <code>stdout</code> to be going to a string, but that doesn’t mess up other threads printing to <i>their</i> <code>stdout</code> at the same time.</p
 ><p
->This library provides a light wrapper around MzScheme parameters, allowing dynamic variables to be declared and used in Arc.</p
+>This hack provides a light wrapper around MzScheme parameters, allowing dynamic variables to be declared and used in Arc.</p
 ><p
 >The <code>declare-dynamic</code> macro declares a dynamic variable, with an optional initial value:</p
 ><blockquote
