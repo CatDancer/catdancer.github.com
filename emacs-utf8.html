@@ -2,90 +2,9 @@
 ><head
 ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
 ><title
->How to convince Emacs to save .arc files in UTF-8</title
-><style type="text/css"
->
-
-
-body {
-  font-family: verdana;
-  margin-left: 2em;
-}
-
-p, ol, ul {
-  width: 40em;
-}
-
-li {
-  margin-bottom: 0.5em;
-}
-
-pre, code {
-  font-family: courier;
-}
-
-td {
-  vertical-align: top;
-  padding: 0 1em 0.5em 0;
-}
-
-table.code {
-  border-collapse: collapse;
-}
-
-table.code td {
-  padding: 5px 1em;
-  font-family: courier, monospace;
-  border: 1px solid #ddd;
-}
-
-table.code td.arrow {
-  border: none;
-  padding: 0 1em;
-  font-family: verdana;
-}
-
-table.code td.spacer {
-  border: none;
-  padding: 0;
-}
-
-table.foo {
-  border-collapse: collapse;
-}
-
-table.foo th {
-  border: none 0px;
-}
-
-table.foo td {
-  vertical-align: baseline;
-  padding: 1em;
-  border: 1px solid #ccc;
-}
-
-
-</style
+>Moved</title
 ></head
-><body
-><a href="/"
->Cat’s hacks</a
->:<h2
->How to convince Emacs to save .arc files in UTF-8</h2
-><p
->MzScheme supports Unicode and defaults to reading and writing files in the Unicode UTF-8 encoding, so you can conveniently use Unicode characters in both strings and symbols.</p
-><p
->UTF-8 is a superset of ASCII, so an ASCII file can be read in as a UTF-8 document without any special translation.  If a Unicode document contains only ASCII characters, then when it is written out as a UTF-8 file it will be a plain ASCII file.</p
-><p
->However, if you use Emacs as your editor, there was some ancient file archive format that had an &ldquo;arc&rdquo; extension, so by default Emacs will save <code>.arc</code> files without any translation from Emacs&rsquo; internal representation of Unicode characters.  This means that while you can easily type or copy Unicode characters into your Emacs buffer, when you save your file the characters will turn into garbage.</p
-><p
->Add this to your <code>.emacs</code> file to have <code>.arc</code> files saved in UTF-8:</p
-><div style="margin-left: 2em"
-><pre
->(setq auto-coding-alist
-  (cons '("\\.arc\\'" . utf-8) auto-coding-alist))
-</pre
-></div
-></body
-></html
->
+><body>
+<p>Moved to <a href="http://hacks.catdancer.ws/emacs-utf8.html">http://hacks.catdancer.ws/emacs-utf8.html</a></p>
+</body>
+</html>
